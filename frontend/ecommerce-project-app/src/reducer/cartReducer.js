@@ -1,7 +1,5 @@
-import { ADD_TO_CART,REMOVE_PRODUCT,SUB_QUANTITY,ADD_QUANTITY } from '../actions/action-types/cart-actions'
-
 const initialState = {
-    products: [],
+    products: [], 
     addedProducts: [],
     total: 0
 }
@@ -11,7 +9,7 @@ const cartReducer= (state = initialState,action)=>{
     
    switch(action.type) {
     
-       case ADD_TO_CART:
+       case "ADD_TO_CART":
         let addedProduct = state.products.find(product => product.id === action.id)
         let existedProduct = state.addedProducts.find(product => product.id === action.id)
            if(existedProduct) {
@@ -31,7 +29,7 @@ const cartReducer= (state = initialState,action)=>{
                     total : newTotal
                 }
             }
-      case REMOVE_PRODUCT:
+      case "REMOVE_PRODUCT":
             let productToRemove= state.addedProducts.find(product => product.id === action.id)
             let new_products = state.addedProducts.filter(product => product.id !== action.id)
             let newTotal = state.total - (productToRemove.price * productToRemove.quantity)
@@ -40,14 +38,14 @@ const cartReducer= (state = initialState,action)=>{
                     addedProducts: new_products,
                     total: newTotal
                 }
-      case ADD_QUANTITY:
+      case "ADD_QUANTITY":
             addedProduct.quantity += 1 
             
                 return{
                 ...state,
                 total: newTotal
             }
-        case SUB_QUANTITY:
+        case "SUB_QUANTITY":
             let addedItem = state.items.find(item=> item.id === action.id) 
    
             if(addedItem.quantity === 1){
@@ -75,77 +73,30 @@ const cartReducer= (state = initialState,action)=>{
 
 export default cartReducer
 
-
-
-/**if(action.type === ADD_TO_CART){
-    let addedProducts = state.products.find(product => product.id === action.id)
-     
-    let existed_product = state.addedProducts.find(product => action.id === product.id)
-    if(existed_product)
-    {
-       addedProduct.quantity += 1 
-        return{
-           ...state,
-            total: state.total + addedProduct.price 
-             }
-   }
-    else{
-       addedProduct.quantity = 1;
-      
-       let newTotal = state.total + addedProduct.price 
-       
-       return{
-           ...state,
-           addedProducts: [...state.addedProducts, addedProduct],
-           total : newTotal
-       }
-       
-   }
-}
-if(action.type === REMOVE_PRODUCT){
-   let itemToRemove= state.addedItems.find(item=> action.id === item.id)
-   let new_items = state.addedItems.filter(item=> action.id !== item.id)
-   
-  
-   let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
-   console.log(itemToRemove)
-   return{
-       ...state,
-       addedItems: new_items,
-       total: newTotal
-   }
+export const addToCart = (id)=>{
+    return{
+        type: "ADD_TO_CART",
+        id
+    }
 }
 
-if(action.type=== ADD_QUANTITY){
-   let addedItem = state.items.find(item=> item.id === action.id)
-     addedItem.quantity += 1 
-     let newTotal = state.total + addedItem.price
-     return{
-         ...state,
-         total: newTotal
-     }
+export const removeProduct = (id)=>{
+    return{
+        type: "REMOVE_PRODUCT",
+        id
+    }
 }
-if(action.type=== SUB_QUANTITY){  
-   let addedItem = state.items.find(item=> item.id === action.id) 
-   
-   if(addedItem.quantity === 1){
-       let new_items = state.addedItems.filter(item=>item.id !== action.id)
-       let newTotal = state.total - addedItem.price
-       return{
-           ...state,
-           addedItems: new_items,
-           total: newTotal
-       }
-   }
-   else {
-       addedItem.quantity -= 1
-       let newTotal = state.total - addedItem.price
-       return{
-           ...state,
-           total: newTotal
-       }
-   }
-   
+
+export const subtractQuantity=(id)=>{
+    return{
+        type: "SUB_QUANTITY",
+        id
+    }
 }
-return state
-} */
+
+export const addQuantity=(id)=>{
+    return{
+        type: "ADD_QUANTITY",
+        id
+    }
+}

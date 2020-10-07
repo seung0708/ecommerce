@@ -26,6 +26,12 @@ class Navbar extends React.Component {
              background: 'darkblue'
           }}
         >About</NavLink>
+        <NavLink
+            to="/cart" exact style={link}
+            activeStyle={{
+             background: 'darkblue'
+          }}
+        >Cart</NavLink>
       </div>
     )
   }

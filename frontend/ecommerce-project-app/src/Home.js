@@ -1,9 +1,32 @@
 import React from 'react';
- 
+import { connect } from 'react-redux'
+import {addProducts} from './actions/cartAction' 
+import ProductList from './components/ProductList'
 class Home extends React.Component {
-  render() {
-    return <h1>Home!</h1>
+    
+  handleClick = (id)=>{
+      this.props.addProducts(id); 
+  }
+
+  render(){
+          return(
+          <div> 
+            <ProductList />
+          </div>             
+          )
+      }
+  }
+
+const mapStateToProps = (state)=>{
+  return {
+    products: state.products
   }
 }
- 
-export default Home;
+const mapDispatchToProps= (dispatch)=>{
+  
+  return{
+      addToCart: (id)=>{dispatch(addProducts(id))}
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home)

@@ -2,14 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import cartReducer from './reducer/cartReducer'
+import productReducer from './reducer/productReducer'
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+
+import thunk from 'redux-thunk'
 
 const store = createStore(
   combineReducers({
-    cart: cartReducer
-    // Your own reducers, sir
-  })
+    cartReducer,
+    productReducer
+  }), applyMiddleware(thunk)
 );
 
 
