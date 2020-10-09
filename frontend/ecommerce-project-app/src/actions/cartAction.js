@@ -1,23 +1,23 @@
-import { addToCart, removeProduct, subtractQuantity, addQuantity} from '../reducer/cartReducer'
 
+export const addToCart = data => {
+    const productId = data.product.id 
+    let quantity = data.quantity
 
-export const addProducts = () => {
     return (dispatch) => {
-        return fetch("http://localhost:3001/api/v1/carts", {
+        return fetch("http://localhost:3001/api/v1/cart_items", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Accept':'application/json'
             },
-            body: JSON.stringify({ title: 'React POST Request Example' })
+            body: JSON.stringify({product_id: productId, quantity: quantity})
         })
           .then(response => response.json())
-          .then(response => { 
-                if (response.error) {
-                    alert(response.error)
-                }
-                else { 
-                dispatch(addToCart(response.data))
-                }
+          .then(data => {
+              const cart = {
+                  ...data.cart, cart_items: data.cart_items
+              }
+              dispatch({type: "NEW_CART", cart })
           });
     };
 }
@@ -27,7 +27,8 @@ export const removeFromCart = () => {
         return fetch("http://localhost:3001/api/v1/carts", {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'Accept':'application/json'
             },
             body: JSON.stringify({ title: 'React POST Request Example' })
         })
@@ -37,7 +38,7 @@ export const removeFromCart = () => {
                     alert(response.error)
                 }
                 else { 
-                dispatch(removeProduct(response.data))
+                 dispatch()
                 }
           });
     };
@@ -58,7 +59,7 @@ export const subractQuantityFromCart = () => {
                     alert(response.error)
                 }
                 else { 
-                dispatch(subtractQuantity(response.data))
+              
                 }
           });
     };
@@ -79,8 +80,18 @@ export const addQuantityToCart = () => {
                     alert(response.error)
                 }
                 else { 
-                dispatch(addQuantity(response.data))
+                
                 }
           });
     };
 }
+
+/**export const fetchCart = () => {
+    return (dispatch) =>{
+        return fetch(`http://localhost:3001/products`)
+        .then(response => response.json())
+        .then(products => {
+            dispatch()
+        })
+    }
+} */ 

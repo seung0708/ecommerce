@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-    before_action :current_cart
+    ##before_action :current_cart
 
     private 
          def current_cart 
@@ -12,7 +12,7 @@ class ApplicationController < ActionController::API
                 end
             end
             if session[:cart_id] == nil
-                @current_cart = Cart.def create
+                @current_cart = Cart.create
                     session[:cart_id] = @current_cart.id
             end
         end 

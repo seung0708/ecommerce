@@ -1,22 +1,28 @@
 import React from 'react';
 //import { connect } from 'react-redux'
-//import {addProducts} from '../actions/cartAction' 
-//import ProductList from '../components/ProductList'
+import ProductCard from '../components/ProductCard'
 
-import ProductListContainer from '../containers/ProductListContainer'
 class Home extends React.Component {
-
-
   render(){
-          return(
-          <div>
-            <h1>Welcome to VHS Nostalgia</h1>
-            <ProductListContainer/>
-  
-          </div>             
-          )
-      }
+      return(
+        <div className="home">
+          <h1>Welcome to VHS Nostalgia</h1>
+          <div className="home-products">
+            <div>
+            {this.props.products.map( product =>
+              <section>
+              <ProductCard key={product.id} product={product} />
+              </section>
+              )}
+            </div>
+          </div> 
+        </div>             
+      )
   }
 
 
-export default Home
+}
+
+
+
+export default Home 

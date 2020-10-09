@@ -1,35 +1,15 @@
-import {
-  FETCH_PRODUCTS_BEGIN,
-  FETCH_PRODUCTS_SUCCESS,
-  FETCH_PRODUCTS_FAILURE
-} from './actionTypes'
-
-export const fetchProductsBegin = () => ({
-  type: FETCH_PRODUCTS_BEGIN
-});
-
-export const fetchProductsSuccess = products => ({
-  type: FETCH_PRODUCTS_SUCCESS,
-  payload: { products }
-});
-
-export const fetchProductsFailure = error => ({
-  type: FETCH_PRODUCTS_FAILURE,
-  payload: { error }
-});
 
 export const fetchProducts = () => {
     return dispatch => {
-      dispatch(fetchProductsBegin());
+     
       return fetch(`http://localhost:3001/api/v1/products`)
         .then(handleErrors)
         .then(response => response.json())
         .then(json => { 
-          dispatch(fetchProductsSuccess(json))
-          return json
+          dispatch({type: "GET_ALL_PRODUCTS", products: json})
           
         })
-        .catch(error => dispatch(fetchProductsFailure(error)));
+        .catch(error => console.log(error));
     };
   }
 
@@ -39,3 +19,15 @@ export const fetchProducts = () => {
     }
     return response;
   }
+
+  export const fetchProduct = product_id => {
+    return dispatch => { 
+      return fetch(`http://localhost:3001/api/v1/${product_id}`)
+      .then(response => response.json())
+      .then(json => {
+        dispatch()
+      })
+
+    }
+  }
+
