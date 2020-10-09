@@ -2,28 +2,27 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Home from './Home'
+import Home from './containers/Home'
 import About from './About'
 import Navbar from './Navbar';
-import CartContainer from './containers/CartContainer'
 import ProductListContainer from './containers/ProductListContainer'
-//import { allProducts } from './actions/productsAction'
-
+import Cart from './components/Cart'
 class App extends React.Component{
 
-  componentDidMount() {
-    //this.props.allProducts()
-  }
+
   render(){
     return (
       <div className="container">
         <Router>
+          <header>
+            <Navbar/>
+          </header>
           <Switch>
-            <Navbar>  </Navbar>
-            <Route exact path='/' component={Home} ></Route>
-            <Route exact path='/about' component={About} ></Route>
-            <Route exact path='/cart' component={CartContainer} ></Route>
-            <Route exact path='/products' component={ProductListContainer} ></Route>
+         
+            <Route exact path='/' component={Home} />
+            <Route exact path='/about' component={About} />
+            <Route exact path='/products' component={ProductListContainer}/>
+            <Route exact path='/cart' component={Cart} />
           </Switch>
         </Router>
       </div>
@@ -32,4 +31,4 @@ class App extends React.Component{
 }
 
 
-export default App 
+export default App

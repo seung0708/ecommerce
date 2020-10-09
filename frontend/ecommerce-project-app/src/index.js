@@ -8,12 +8,12 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 
 import thunk from 'redux-thunk'
 
-const store = createStore(
-  combineReducers({
-    cartReducer,
-    productReducer
-  }), applyMiddleware(thunk)
-);
+const rootReducer = combineReducers({
+  products: productReducer,
+  cart: cartReducer
+})
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 
 ReactDOM.render(

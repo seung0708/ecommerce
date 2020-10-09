@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_10_06_012012) do
     t.string "image"
     t.string "description"
     t.decimal "price"
+    t.integer "quantity"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
