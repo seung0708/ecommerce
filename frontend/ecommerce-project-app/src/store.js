@@ -1,14 +1,19 @@
 import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import allProducts from './reducers/allProducts'
 import cart from './reducers/cart'
-import user from './reducers/userActions.js'
 import thunk from 'redux-thunk'
-
+import currentUser from './reducers/currentUser'
+import loginForm from './reducers/loginForm'
+import signUpForm from './reducers/signUpForm'
+import productForm from './reducers/productForm'
 
 const reducer = combineReducers({
     allProducts,
     cart,
-    user
+    currentUser,
+    loginForm, 
+    signUpForm,
+    productForm
 })
 
 

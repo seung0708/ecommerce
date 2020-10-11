@@ -26,7 +26,7 @@ class Api::V1::ProductsController < ApplicationController
             render json: products, status: created
         else 
             error_resp = {error: @product.errors.full_messages.to_sentence}
-            render json: error_resp, status: unprocessable_entity
+            render json: error_resp, status: :unprocessable_entity
         end 
     end
 
@@ -39,7 +39,7 @@ class Api::V1::ProductsController < ApplicationController
                 error: @product.errors.full_messages.to_sentence,
                 invalid_user: "You don't have acces to this product"
             }
-            render json: error_resp, status: unprocessable_entity
+            render json: error_resp, status: :unprocessable_entity
         end 
     end
 

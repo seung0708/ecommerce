@@ -11,48 +11,42 @@ import Cart from './components/Cart'
 import Signup from './components/SignUp';
 import Dashboard from './components/Dashboard'
 import Login from './components/Login';
-import { checkLoggedIn} from './actions/userActions'
-
+import { getCurrentUser } from './actions/currentUser'
+import ProductForm from './components/ProductForm'
 
 class App extends React.Component {
-  state = {
-    loading: true,
-  };
-
-  toggleLoading = () => {
-    this.setState({ loading: !this.state.loading });
-  };
-
-
   componentDidMount() {
-    this.props.checkLoggedIn(this.toggleLoading);
+    this.props.getCurrentUser()
     this.props.getAllProducts()
     this.props.fetchCart()
   }
 
   render() {
-    if (this.state.loading) return <h1>Loading...</h1>;
+    const { loggedIn, createProduct } = this.props
     return(
         <div className="app">
-          <Navbar />
+          <Navbar location={this.props.location} history={this.props.history} />
          <Switch>
            <Route exact path='/' component={Home} />
+           <Route exact path="/signup" render={({ history }) => <Signup history={history} />}/>
+           <Route exact path="/login" component={Login} />
+           <Route exact path="/products/new" render={props => <ProductForm onSubmit={createProduct} {...props} buttonText={"Create a Product"}/>} />
            <Route
               path="/dashboard"
               render={(props) => {
-                if (this.props.loggedIn) {
+                if (loggedIn) {
                   return <Dashboard {...props} />;
                 } else {
                   return <Redirect to="/login" />;
                 }
               }}
             />
+           
            <Route exact path='/products/:id' render={(routerProps) => 
            <ProductPage {...routerProps}/>}
            />
            <Route exact path='/cart' component={Cart}/>
-           <Route path="/signup" component={Signup} />
-            <Route path="/login" component={Login} />
+           
          </Switch>
         </div>
     )
@@ -61,9 +55,10 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
+    loggedIn: !!state.currentUser,
     products: state.allProducts.products,
     cart: state.newCart
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getAllProducts, fetchCart, checkLoggedIn })(App));
+export default withRouter(connect(mapStateToProps, {getAllProducts, fetchCart, getCurrentUser})(App));

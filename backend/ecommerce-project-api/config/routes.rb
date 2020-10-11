@@ -7,20 +7,17 @@ Rails.application.routes.draw do
       resources :carts
       resources :cart_items
       resources :users
-      resources :sessions 
     end
   end 
   post "/api/v1/login", to: "api/v1/sessions#create"
   post "/api/v1/signup", to: "api/v1/users#create"
-  delete "/api/v1/logout", to: "api/v1/sessions#logout"
-  get "/api/v1/logged_in", to: "api/v1/sessions#logged_in"
+  delete "/api/v1/logout", to: "api/v1/sessions#destroy"
+  get "/api/v1/get_current_user", to: "api/v1/sessions#get_current_user"
   
   get '/carts/newcart', to: 'carts#newcart'
 
   post '/api/v1/cart_items', to: 'cart_items#create'
   get  '/api/v1/cart_items/:id', to: 'cart_items#show'
 
-  get '/api/v1/products', to: 'products#index'
-  get '/api/v1/products/:id', to: 'products#show'
 
 end
