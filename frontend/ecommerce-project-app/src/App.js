@@ -1,40 +1,69 @@
-import React, {Component, Fragment}  from 'react';
+import React from 'react';
+import Home from './components/Home'
+import Navbar from './components/NavBar'
 import './App.css';
-import {Switch, Route}from 'react-router-dom'
-import { connect } from 'react-redux'
-import Home from './containers/Home'
-import About from './containers/About'
-import ProductPage from './containers/ProductPage'
-import CartContainer from './containers/CartContainer'
-import Navbar from './components/Navbar'
-import {fetchProducts} from './actions/productsAction'
-//import {fetchCart} from './actions/cartAction'
+import {getAllProducts} from './actions/allProducts'
+import {fetchCart} from './actions/cart'
+import {connect} from 'react-redux'
+import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
+import ProductPage from './components/ProductPage'
+import Cart from './components/Cart'
+import Signup from './components/SignUp';
+import Dashboard from './components/Dashboard'
+import Login from './components/Login';
+import { checkLoggedIn} from './actions/userActions'
 
 
-class App extends Component{
+class App extends React.Component {
+  state = {
+    loading: true,
+  };
+
+  toggleLoading = () => {
+    this.setState({ loading: !this.state.loading });
+  };
+
+
   componentDidMount() {
-    this.props.fetchProducts()
-    //this.props.fetchCart()
+    this.props.checkLoggedIn(this.toggleLoading);
+    this.props.getAllProducts()
+    this.props.fetchCart()
   }
- 
-  render(){
-    return (
-      <Fragment>
-         <Navbar />
-        <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/about' component={About} />
-            <Route exact path='/products' component={ProductPage} />
-            <Route exact path='/cart' component={CartContainer} />
-        </Switch>        
-      </Fragment>
-    );
+
+  render() {
+    if (this.state.loading) return <h1>Loading...</h1>;
+    return(
+        <div className="app">
+          <Navbar />
+         <Switch>
+           <Route exact path='/' component={Home} />
+           <Route
+              path="/dashboard"
+              render={(props) => {
+                if (this.props.loggedIn) {
+                  return <Dashboard {...props} />;
+                } else {
+                  return <Redirect to="/login" />;
+                }
+              }}
+            />
+           <Route exact path='/products/:id' render={(routerProps) => 
+           <ProductPage {...routerProps}/>}
+           />
+           <Route exact path='/cart' component={Cart}/>
+           <Route path="/signup" component={Signup} />
+            <Route path="/login" component={Login} />
+         </Switch>
+        </div>
+    )
   }
 }
 
-const mapDispatchToProps = {
-  fetchProducts: fetchProducts,
-  //fetchCart: fetchCart
+const mapStateToProps = state => {
+  return {
+    products: state.allProducts.products,
+    cart: state.newCart
+  }
 }
 
-export default connect(null,mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, {getAllProducts, fetchCart, checkLoggedIn })(App));

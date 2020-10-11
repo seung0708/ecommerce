@@ -1,27 +1,34 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-export default class ProductCard extends Component {
+
+class ProductCard extends Component {
+
     handleClick = () => {
-        //debugger
-        this.props.history.push(`http://localhost:3001/products/${this.props.product.id}`)
+        console.log(this.props)
+        //this.props.push(`${this.props.history.product.id}`)
     }
 
     render() {
         return (
-            <div className="product-card">
-                <Link href="" onClick={this.handleClick}>
-                    <div className="product-card-image">
-                        <img alt="product"></img>
-                    </div>
+            <article className="card" >
+                <Link href=" " onClick={this.handleClick}>
+                    <picture className="thumbnail">
+                        <img src={this.props.product.image} alt="A banana that looks like a bird"></img>
+                    </picture>
                     <div className="card-content">
-                        <h2>{this.props.product.title}</h2>
+
+                        <h2>{this.props.product.name}</h2>
                         <p>{this.props.product.description}</p>
-                        <h2>{this.props.product.price}</h2>
+                        <h3>${this.props.product.price}</h3>
+                       
                     </div>
                 </Link>
-            </div>
-            
-        )
+            </article>
+    )
     }
 }
+
+
+
+export default ProductCard
