@@ -5,7 +5,7 @@ class Api::V1::SessionsController < ApplicationController
 
         if @user && @user.authenticate(params[:session][:password])
             session[:id] = @user.id
-            render json: { status: 201, user: @user, logged_in: true}
+            render json: @user
         else
             render json: { error: "Invalid email and password"}
         end
@@ -13,9 +13,9 @@ class Api::V1::SessionsController < ApplicationController
 
     def get_current_user
         if logged_in?
-          render json: { status: 201, user: current_user, logged_in: true}
+          render json: current_user
         else
-          render json: { erro: "Not logged in"}
+          render json: { error: "Not logged in"}
         end
       end
   

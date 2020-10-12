@@ -9,7 +9,7 @@ import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
 import ProductPage from './components/ProductPage'
 import Cart from './components/Cart'
 import Signup from './components/SignUp';
-import Dashboard from './components/Dashboard'
+//import Dashboard from './components/Dashboard'
 import Login from './components/Login';
 import { getCurrentUser } from './actions/currentUser'
 import ProductForm from './components/ProductForm'
@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { loggedIn, createProduct } = this.props
+    const {createProduct } = this.props
     return(
         <div className="app">
           <Navbar location={this.props.location} history={this.props.history} />
@@ -31,16 +31,7 @@ class App extends React.Component {
            <Route exact path="/signup" render={({ history }) => <Signup history={history} />}/>
            <Route exact path="/login" component={Login} />
            <Route exact path="/products/new" render={props => <ProductForm onSubmit={createProduct} {...props} buttonText={"Create a Product"}/>} />
-           <Route
-              path="/dashboard"
-              render={(props) => {
-                if (loggedIn) {
-                  return <Dashboard {...props} />;
-                } else {
-                  return <Redirect to="/login" />;
-                }
-              }}
-            />
+           
            
            <Route exact path='/products/:id' render={(routerProps) => 
            <ProductPage {...routerProps}/>}
@@ -55,7 +46,7 @@ class App extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: !!state.currentUser,
+   
     products: state.allProducts.products,
     cart: state.newCart
   }

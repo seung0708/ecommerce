@@ -1,4 +1,4 @@
-import { setAllProducts, fetchProduct} from '../reducers/allProducts'
+import {setAllProducts, fetchProduct} from '../reducers/allProducts'
 
 export const getAllProducts = () => {    
     return dispatch => {
@@ -25,7 +25,6 @@ export const getAllProducts = () => {
 
 
 export const getProduct = id => {    
-    debugger
     return dispatch => {
         return fetch(`http://localhost:3001/api/v1/products/${id}`, {
             credentials: "include",

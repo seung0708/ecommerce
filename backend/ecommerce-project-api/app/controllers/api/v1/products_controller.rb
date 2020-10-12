@@ -14,16 +14,17 @@ class Api::V1::ProductsController < ApplicationController
     def current_user_products
         if logged_in?
             @products = current_user.products 
-            render json: products
+            ender json: products
         else
             render json: { notice: "You haven't uploaded any products!"}
         end 
     end 
 
     def create
-        @product = current_user.products.build(product_params)
+        #byebug
+        @product = Product.new(product_params)
         if @product.save
-            render json: products, status: created
+            render json: @product
         else 
             error_resp = {error: @product.errors.full_messages.to_sentence}
             render json: error_resp, status: :unprocessable_entity
@@ -33,7 +34,7 @@ class Api::V1::ProductsController < ApplicationController
     def update
         @product = Product.find_by(id: params[:id])
         if @product.update(product_params)
-            render json: product
+            render json: @product
         else 
             error_resp = {
                 error: @product.errors.full_messages.to_sentence,
@@ -44,7 +45,7 @@ class Api::V1::ProductsController < ApplicationController
     end
 
     def product_params
-        params.require(:product).permit(:title, :description, :image, :price, :quantity)
+        params.require(:product).permit(:title, :image, :description, :price, :quantity, :user_id)
     end 
 
 end

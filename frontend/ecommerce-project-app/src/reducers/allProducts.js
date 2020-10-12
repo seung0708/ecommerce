@@ -9,6 +9,16 @@ export default (state = initialState, action) => {
                 ...state,
                 products: action.products
             } 
+        case "ADD_PRODUCT":
+            return { 
+                ...state,
+                product: state.concat(action.product)
+            }
+        case "FETCH_PRODUCT":
+            return {
+                ...state, 
+                product: action.product
+            }
         default:
             return state
     }
@@ -28,3 +38,12 @@ export const fetchProduct = product => {
         product
     }
 }
+
+
+export const addProduct = product => {
+    return {
+        type: "ADD_PRODUCT",
+        product
+    }
+}
+

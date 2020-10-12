@@ -1,11 +1,11 @@
 class Api::V1::UsersController < ApplicationController
 def create
-    #byebug
+    byebug
     @user = User.new(user_params)
 
     if @user.save
       session[:id] = @user.id
-      render json: { status: 201, user: @user, logged_in: true}
+      render json: 
     else
       error_resp = { error: @user.errors.full_messages.to_sentence}
       render json: error_resp, status: :unprocessable_entity

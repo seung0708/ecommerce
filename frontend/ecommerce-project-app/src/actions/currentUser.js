@@ -2,19 +2,21 @@
 //import { resetSignUpForm } from './signUpForm'
 
 export const setCurrentUser = user => {
-    return {
-        type: "SET_CURRENT_USER",
-        user
-    }
+  return {
+      type: "SET_CURRENT_USER",
+      user
+  }
 }
 
 export const clearCurrentUser = () => {
-    return {
-        type: "CLEAR_CURRENT_USER"
-    }
+  return {
+      type: "CLEAR_CURRENT_USER"
+  }
 }
 
-export const login = (credentials, history) => {
+
+
+export const login = (credentials) => {
     return (dispatch) => {
       fetch(`http://localhost:3001/api/v1/login`, {
         credentials: 'include',
@@ -27,11 +29,11 @@ export const login = (credentials, history) => {
         .then((res) => res.json())
         .then(response => {
          if (response.error) {
-             alert(response.error)
+             alert(response.error) 
          } else {
              dispatch(setCurrentUser(response))
              //dispatch(resetLoginForm())
-             history.push('/dashboard')
+             //history.push('/')
          }
         
         })
@@ -40,15 +42,18 @@ export const login = (credentials, history) => {
   };
 
 
-  export const signup = (credentials, history) => {
+  export const signup = credentials => {
     return (dispatch) => {
+      const userInfo = {
+        user: credentials
+      }
       fetch(`http://localhost:3001/api/v1/signup`, {
         credentials: 'include',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ user: credentials }),
+        body: JSON.stringify(userInfo),
       })
         .then((res) => res.json())
         .then(response => {
@@ -57,7 +62,7 @@ export const login = (credentials, history) => {
          } else {
              dispatch(setCurrentUser(response))
              //dispatch(resetSignUpForm())
-             history.push('/dashboard')
+             //history.push('/dashboard')
          }
         
         })
@@ -68,7 +73,8 @@ export const login = (credentials, history) => {
 
 export const logout = () => {
    return (dispatch) => {
-    dispatch(clearCurrentUser)
+    dispatch(clearCurrentUser())
+    //dispatch(clearProducts())
     fetch(`http://localhost:3001/api/v1/logout`, {
         credentials: 'include',
         method: 'DELETE',

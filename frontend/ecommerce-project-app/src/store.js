@@ -6,6 +6,7 @@ import currentUser from './reducers/currentUser'
 import loginForm from './reducers/loginForm'
 import signUpForm from './reducers/signUpForm'
 import productForm from './reducers/productForm'
+import updateProductForm from './reducers/updateProductForm'
 
 const reducer = combineReducers({
     allProducts,
@@ -13,7 +14,8 @@ const reducer = combineReducers({
     currentUser,
     loginForm, 
     signUpForm,
-    productForm
+    productForm,
+    updateProductForm
 })
 
 

@@ -1,25 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ProductCard from './ProductCard'
 
+class ProductListPage extends Component {
 
-class ProductList extends Component {
-
-    handleClick = () => {
-        this.props.history.push(`/${this.props.product.id}`)
+    mapProducts = () =>{ 
+        console.log(this.props.products.map(product => {
+           return product.title
+        }))
+        this.props.products.map(product => {
+        return <ProductCard key={product.id} product={product}/>})
     }
-
     render() {
         return (
-            <div >
-                <ul>
-                    <li>
-                        {this.props.product.name}
-                    </li>     
-                </ul>
+            <div className="home">
+                <div className="home-products">
+                    <section className="cards">
+                    {this.props.products.map(product => {
+                        return <ProductCard key={product.id} product={product}/>
+                    })}
+                    {/**this.products.map(product => {
+                        return <ProductCard key={product.id} product={product} />
+                    })*/}
+                    </section>
+                </div>
             </div>
-        );
+        )
     }
 }
 
+const mapStateToProps = state =>{
+    return {
+        products: state.allProducts.products
+    }
+}
 
-export default connect()(ProductList);
+export default connect(mapStateToProps)(ProductListPage)

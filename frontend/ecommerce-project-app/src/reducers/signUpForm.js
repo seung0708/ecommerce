@@ -1,5 +1,4 @@
 const initialState = {
-    name: "",
     email: "",
     password: ""
 }
@@ -7,7 +6,9 @@ const initialState = {
 export default (state = initialState, action) => {
     switch (action.type) {
         case "UPDATE_SIGNUP_FORM":
-            return action.formData
+            return {
+                
+            }
         case "RESET_SIGNUP_FORM":
             return initialState
         default:
