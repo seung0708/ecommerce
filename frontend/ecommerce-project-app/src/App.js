@@ -1,55 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react';
+import {getAllProducts} from './actions/allProducts'
 import Home from './components/Home'
 import Navbar from './components/NavBar'
+import ProductList from './components/ProductList'
+import Footer from './components/Footer'
+import Header from './components/Header'
 import './App.css';
-import {getAllProducts} from './actions/allProducts'
-import {fetchCart} from './actions/cart'
+import {Route, Switch} from 'react-router-dom'
+
+import {withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {Route, Switch, withRouter, Redirect} from 'react-router-dom'
-import ProductPage from './components/ProductPage'
-import Cart from './components/Cart'
-import Signup from './components/SignUp';
-//import Dashboard from './components/Dashboard'
-import Login from './components/Login';
-import { getCurrentUser } from './actions/currentUser'
-import ProductForm from './components/ProductForm'
+import ProductCard from './components/ProductCard'
+import ProductForm from './components/ProductForm';
 
-class App extends React.Component {
+
+class App extends Component {
+
   componentDidMount() {
-    this.props.getCurrentUser()
     this.props.getAllProducts()
-    this.props.fetchCart()
-  }
-
+}
   render() {
-    const {createProduct } = this.props
+    const {products} = this.props 
     return(
-        <div className="app">
-          <Navbar location={this.props.location} history={this.props.history} />
-         <Switch>
-           <Route exact path='/' component={Home} />
-           <Route exact path="/signup" render={({ history }) => <Signup history={history} />}/>
-           <Route exact path="/login" component={Login} />
-           <Route exact path="/products/new" render={props => <ProductForm onSubmit={createProduct} {...props} buttonText={"Create a Product"}/>} />
+         <div>
+          <Header />
+          <Navbar location={this.props.location}/>
+          <Switch>
+            <Route exact path='/' component={Home} /> 
+               <Route exact path='/products/new' component={ProductForm} />
+                <Route exact path='/products' component={ProductList} />
+                <Route exat path='/products/:id'   render={props => {
+                  const product = products.find(product => product.id === props.match.params.id)
+                  console.log(product)
+                  return <ProductCard product={product} {...props} />
+                }}/>
            
-           
-           <Route exact path='/products/:id' render={(routerProps) => 
-           <ProductPage {...routerProps}/>}
-           />
-           <Route exact path='/cart' component={Cart}/>
-           
-         </Switch>
-        </div>
+            </Switch>
+            <Footer />
+          </div>
+          
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-   
-    products: state.allProducts.products,
-    cart: state.newCart
+  
+    products: state.allProducts.products
   }
 }
 
-export default withRouter(connect(mapStateToProps, {getAllProducts, fetchCart, getCurrentUser})(App));
+
+export default withRouter(connect(mapStateToProps, {getAllProducts})(App))

@@ -11,8 +11,9 @@ export default (state = initialState, action) => {
             } 
         case "ADD_PRODUCT":
             return { 
+                
                 ...state,
-                product: state.concat(action.product)
+                product: action.product
             }
         case "FETCH_PRODUCT":
             return {
@@ -20,7 +21,7 @@ export default (state = initialState, action) => {
                 product: action.product
             }
         default:
-            return state
+            return state 
     }
 }
 

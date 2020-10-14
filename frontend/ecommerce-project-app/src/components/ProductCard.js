@@ -1,34 +1,21 @@
-import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import {Link} from 'react-router-dom'
+import PageNotFound from './PageNotFound'
+const ProductCard = ({ product }) => {
+  return (
+      product ?
+      <div>
+        <div className="product-card">
+            <h1>{product.attributes.title}</h1>
+             <img src={product.attributes.image} height="500"></img>
+             <h3>{product.attributes.description}</h3>
+             <h4>${product.attributes.price}</h4>
+        </div>
 
-
-class ProductCard extends Component {
-
-    handleClick = () => {
-        console.log(this.props)
-        //this.props.push(`${this.props.history.product.id}`)
-    }
-
-    render() {
-        return (
-            <article className="card" >
-                <Link href=" " onClick={this.handleClick}>
-                    <picture className="thumbnail">
-                        <img src={this.props.product.image} alt="A banana that looks like a bird"></img>
-                    </picture>
-                    <div className="card-content">
-
-                        <h2>{this.props.product.name}</h2>
-                        <p>{this.props.product.description}</p>
-                        <h3>${this.props.product.price}</h3>
-                       
-                    </div>
-                </Link>
-            </article>
-    )
-    }
+      </div>
+        : <PageNotFound />
+  )
 }
 
-
-
 export default ProductCard
+    

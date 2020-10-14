@@ -1,4 +1,4 @@
-import {setAllProducts, fetchProduct} from '../reducers/allProducts'
+import {setAllProducts, addProduct} from '../reducers/allProducts'
 
 export const getAllProducts = () => {    
     return dispatch => {
@@ -9,38 +9,43 @@ export const getAllProducts = () => {
                 "Content-Type": "application/json"
             },
         })
-        .then(res => res.json())
+        .then(res => res.json()) 
         .then(response => { 
             if (response.error) {
                 alert(response.error)
             } else {                 
-                dispatch(setAllProducts(response))
+                dispatch(setAllProducts(response.data))
             }
         })
         .catch(console.log)
     }
-}
+} 
 
+ 
 
-
-
-export const getProduct = id => {    
+export const createProduct = (productData ) => {
     return dispatch => {
-        return fetch(`http://localhost:3001/api/v1/products/${id}`, {
+        const sendableProductData = {
+            title: productData.title,
+            image: productData.image,
+            description: productData.description,
+            quantity: productData.quantity,
+            price: productData.price
+        }
+        return fetch("http://localhost:3001/api/v1/products", {
             credentials: "include",
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
+            body: JSON.stringify(sendableProductData)
         })
-        .then(res => res.json())
-        .then(response => { 
+        .then(resp => resp.json())
+        .then(response => {
             if (response.error) {
                 alert(response.error)
-            } else {                 
-                dispatch(fetchProduct(response))
-            }
+            } else 
+            dispatch(addProduct(response.data))
         })
-        .catch(console.log)
     }
 }

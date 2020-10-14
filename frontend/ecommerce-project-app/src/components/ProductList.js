@@ -1,38 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ProductCard from './ProductCard'
+import React from 'react' 
+import {Link } from 'react-router-dom'
+import {connect} from 'react-redux'
 
-class ProductListPage extends Component {
-
-    mapProducts = () =>{ 
-        console.log(this.props.products.map(product => {
-           return product.title
-        }))
-        this.props.products.map(product => {
-        return <ProductCard key={product.id} product={product}/>})
-    }
-    render() {
-        return (
-            <div className="home">
-                <div className="home-products">
-                    <section className="cards">
-                    {this.props.products.map(product => {
-                        return <ProductCard key={product.id} product={product}/>
-                    })}
-                    {/**this.products.map(product => {
-                        return <ProductCard key={product.id} product={product} />
-                    })*/}
-                    </section>
-                </div>
-            </div>
-        )
-    }
-}
+const ProductList = props => {
+    const productCards = 
+      props.products.map(product => 
+            (
+                <Link to={`/products/${product.id}`}>
+                    <div key={product.id} className="col-sm-3">
+                        <img src={product.attributes.image} height="500px"/>
+                    </div>
+                </Link>
+            )
+        ) 
+    
+  
+    return productCards
+  }
 
 const mapStateToProps = state =>{
     return {
         products: state.allProducts.products
     }
-}
+} 
 
-export default connect(mapStateToProps)(ProductListPage)
+export default connect(mapStateToProps)(ProductList)
