@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import allProducts from './reducers/allProducts'
-
+import cartReducer from './reducers/cartReducer'
 import thunk from 'redux-thunk'
 import updateForm from './reducers/updateProduct'
 
 const reducer = combineReducers({
     allProducts,
-  
+    cartReducer,
     updateForm
     
    

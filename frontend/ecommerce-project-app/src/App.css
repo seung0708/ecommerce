@@ -6,6 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Sansita Swashed'
+  
 }
 
 .nav-container {
@@ -47,18 +48,12 @@
   top: 80px;
 }
 
-.product-form {
-   position: relative;
-   top: 100px;
-   left: 50px;
-}
-
 .product-card {
   text-align: center;
-  position: absolute;
-  top: 200px;
+  position: fixed;
+  top: 100px;
 
-  left: 700px;
+  left: 600px;
 }
 
 .col-sm-3 {
@@ -72,4 +67,9 @@
   position: relative;
   top: 100px;
   left: 600px;
+}
+
+.cart-list {
+  position: relative;
+  top: 100px;
 }

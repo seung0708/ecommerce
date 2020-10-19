@@ -19,10 +19,10 @@ export const getAllProducts = () => {
         })
         .catch(console.log)
     }
-} 
-
+}   
  
-
+ 
+ 
 export const createProduct = (productData ) => {
     return dispatch => {
         const sendableProductData = {

@@ -23,8 +23,8 @@ export default (state = initialState, action) => {
         default:
             return state 
     }
-}
-
+} 
+ 
 export const setAllProducts = products => {
     return {
         type: "SET_ALL_PRODUCTS",

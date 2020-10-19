@@ -1,27 +1,41 @@
-import React from 'react' 
-import {Link } from 'react-router-dom'
+import React, {Component} from 'react' 
 import {connect} from 'react-redux'
+import {addCart} from '../actions/cartActions'
 
-const ProductList = props => {
-    const productCards = 
-      props.products.map(product => 
-            (
-                <Link to={`/products/${product.id}`}>
-                    <div key={product.id} className="col-sm-3">
-                        <img src={product.attributes.image} height="500px"/>
+class ProductList extends Component {
+
+    handleClick = product => {
+        this.props.addCart(product)
+    }
+    render() {
+        const productCards = this.props.products.map(product =>  {
+            
+            return(
+                <div>
+                    <div className="col-sm-3" >
+                        <h1>{product.attributes.title}</h1>
+                        <img src={product.attributes.image} height="500"></img>
+                        <h3>{product.attributes.description}</h3>
+                        <h4>${product.attributes.price}</h4>
+                        <button  onClick={() => {this.handleClick(product)}}>Add To Cart</button>
                     </div>
-                </Link>
-            )
-        ) 
-    
-  
-    return productCards
-  }
-
-const mapStateToProps = state =>{
-    return {
-        products: state.allProducts.products
+                </div>
+            ) 
+        })
+        return(
+            <div className="product-list">
+                {productCards}
+            </div>
+        )
     }
 } 
 
-export default connect(mapStateToProps)(ProductList)
+const mapStateToProps = state => {
+    
+    return {
+      products: state.allProducts.products
+    }
+    
+  }
+
+export default connect(mapStateToProps, {addCart})(ProductList)

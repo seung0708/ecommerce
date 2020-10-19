@@ -1,10 +1,8 @@
-//stateless component
 import React from 'react'
-//import ProductContainer from './ProductContainer'
-///import Navbar from '../components/NavBar'
 import About from './About'
-
 import ProductList from './ProductList'
+import Cart from './Cart'
+
 
 const Home = () => {
     return(
@@ -12,6 +10,7 @@ const Home = () => {
             <div>
               <About />
               <ProductList />
+            
             </div>
             
         </div>
