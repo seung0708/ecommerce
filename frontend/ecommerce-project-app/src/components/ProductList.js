@@ -13,8 +13,8 @@ class ProductList extends Component {
             return(
                 <div>
                     <div className="col-sm-3" >
+                        <img src={product.attributes.image} height="250"></img>
                         <h1>{product.attributes.title}</h1>
-                        <img src={product.attributes.image} height="500"></img>
                         <h3>{product.attributes.description}</h3>
                         <h4>${product.attributes.price}</h4>
                         <button  onClick={() => {this.handleClick(product)}}>Add To Cart</button>

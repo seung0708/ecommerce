@@ -13,18 +13,17 @@ class Cart extends Component {
     render() {
         let addProducts = this.props.products.length > 0 ? (
            this.props.products.map(product => { 
-            {console.log(product.attributes.product.id)}
+            
                 return (
                  <CartList key={product.attributes.product.id} product={product}/>
                 )
             })
-        ) : 
-        (
-            <p>Cart is Empty</p>
-        ) 
+        ) : <p>Cart is Empty</p>
+            
 
         return(
             <div>
+                {console.log(this.props.products.length)}
                {addProducts}
             </div>
         )

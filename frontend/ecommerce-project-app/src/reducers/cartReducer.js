@@ -1,6 +1,6 @@
 const initialState = {
     addedProducts: [],
-    products: []
+  
    
     
 }
@@ -24,12 +24,6 @@ export default (state = initialState, action) => {
             
             }
             
-        }
-        case "SET_ALL_PRODUCTS": {
-            return { 
-                ...state,
-                products: action.products
-            } 
         }
         default: 
             return state

@@ -5,8 +5,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Sansita Swashed'
-  
+  font-family: 'Sansita Swashed';
+  font-size: 13px;  
 }
 
 .nav-container {
@@ -60,7 +60,7 @@
   width: 25%;
   float: left;
   position: relative;
-  top: 150px;
+  top: 100px;
 }
 
 .page-not-found {
