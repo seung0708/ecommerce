@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2020_10_16_173800) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "total_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

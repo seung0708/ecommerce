@@ -10,18 +10,16 @@ export const addToCart = id => {
     return {
         type: "ADD_TO_CART",
         id
-    }
+    } 
 
 } 
 
-export const fetchCart = id => {
+export const setAllProducts = products => {
     return {
-        type: "FETCH_CART",
-        id
+        type: "SET_ALL_PRODUCTS",
+        products
     }
 }
-
-
 
 export const addCart = id => {
     return dispatch => {
@@ -47,7 +45,7 @@ export const addCart = id => {
     }
 
     export const productsInCart = () => {
-        //debugger
+       
         return dispatch => {
            
             return fetch(`http://localhost:3001/api/v1/cart_products`, {
@@ -68,5 +66,24 @@ export const addCart = id => {
             .catch(console.log)
         }
     }
-
-     
+    
+    export const getAllProducts = () => {    
+        return dispatch => {
+            return fetch(`http://localhost:3001/api/v1/products`, {
+                credentials: "include",
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            })
+            .then(res => res.json()) 
+            .then(response => { 
+                if (response.error) {
+                    alert(response.error)
+                } else {                 
+                    dispatch(setAllProducts(response.data))
+                }
+            })
+            .catch(console.log)
+        }
+    }   

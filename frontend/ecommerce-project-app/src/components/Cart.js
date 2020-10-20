@@ -5,25 +5,21 @@ import CartList from './CartList'
 
 class Cart extends Component {
     componentDidMount() {
-        
         this.props.productsInCart() 
-        
+       
     }
 
     render() {
-        let addProducts = this.props.products.length > 0 ? (
-           this.props.products.map(product => { 
+        let addProducts =  this.props.products.length > 0 ?  
+        this.props.products.map(product => {
+            return (        
+               <CartList key={product.attributes.product.id} product={product} />
+            )
+        }) : <p>Cart is Empty</p>
             
-                return (
-                 <CartList key={product.attributes.product.id} product={product}/>
-                )
-            })
-        ) : <p>Cart is Empty</p>
-            
-
         return(
             <div>
-                {console.log(this.props.products.length)}
+            {console.log(this.props.products)}
                {addProducts}
             </div>
         )
@@ -31,7 +27,7 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => {
-    
+        
     return {
         products: state.cartReducer.addedProducts
     }

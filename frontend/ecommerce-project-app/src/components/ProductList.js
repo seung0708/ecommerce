@@ -1,19 +1,26 @@
 import React, {Component} from 'react' 
 import {connect} from 'react-redux'
-import {addCart} from '../actions/cartActions'
+import {addCart, getAllProducts} from '../actions/cartActions'
+
+
 
 class ProductList extends Component {
+
+    componentDidMount() {
+        this.props.getAllProducts()
+    }
 
     handleClick = product => {
         this.props.addCart(product)
     }
     render() {
+        console.log(this.props.products)
         const productCards = this.props.products.map(product =>  {
-            
+           
             return(
                 <div>
-                    <div className="col-sm-3" >
-                        <img src={product.attributes.image} height="250"></img>
+                    <div className="col-sm-3" key={product.attributes.id}>
+                        <img src={product.attributes.image} alt="hello" height="250"></img>
                         <h1>{product.attributes.title}</h1>
                         <h3>{product.attributes.description}</h3>
                         <h4>${product.attributes.price}</h4>
@@ -33,9 +40,9 @@ class ProductList extends Component {
 const mapStateToProps = state => {
     
     return {
-      products: state.allProducts.products
+      products: state.cartReducer.products
     }
     
   }
 
-export default connect(mapStateToProps, {addCart})(ProductList)
+export default connect(mapStateToProps, {addCart, getAllProducts})(ProductList)
