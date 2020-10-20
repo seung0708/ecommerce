@@ -1,6 +1,6 @@
 import React from 'react'
 import About from './About'
-import ProductList from './ProductList'
+import ProductList from '../containers/Products'
 
 
 

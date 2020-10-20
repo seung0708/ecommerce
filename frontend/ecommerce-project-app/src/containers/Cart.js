@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {connect } from 'react-redux';
 import {productsInCart} from '../actions/cartActions'
-import CartList from './CartList'
+import CartList from '../components/CartList'
 
 class Cart extends Component {
     componentDidMount() {
         this.props.productsInCart() 
        
-    }
+    } 
 
     render() {
         let addProducts =  this.props.products.length > 0 ?  

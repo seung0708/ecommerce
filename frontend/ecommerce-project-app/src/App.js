@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import Home from './components/Home'
 import Navbar from './components/NavBar'
-import Cart from './components/Cart'
-import ProductList from './components/ProductList'
+import Cart from './containers/Cart'
+import ProductList from './containers/Products'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import './App.css';

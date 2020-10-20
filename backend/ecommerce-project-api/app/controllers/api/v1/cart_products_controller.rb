@@ -1,8 +1,6 @@
 class Api::V1::CartProductsController < ApplicationController
     def index
-        #byebug
         @cart_products = CartProduct.all
-        
         render json: CartProductSerializer.new(@cart_products)
     end
 
@@ -15,6 +13,7 @@ class Api::V1::CartProductsController < ApplicationController
         if current_cart.products.include?(added_product)
             @cart_product = current_cart.cart_products.find_by(:product_id => added_product)
             @cart_product.quantity += 1
+            @cart_product.save
             render json: CartProductSerializer.new(@cart_product)
         else 
         @cart_product = CartProduct.new
