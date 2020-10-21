@@ -2,18 +2,16 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 
 
-const Navbar = (id) =>{ 
+const Navbar = () =>{ 
     return(
-    
-    <div className="nav-container">
-        <div className="right">
-            <NavLink to="/">Home</NavLink>
-     
-            <NavLink to='/cart' >Cart</NavLink>
-        </div>   
-        
-    </div>
-            
+        <nav>
+        <div className="nav-wrapper blue lighten-2">
+          <ul className="right hide-on-med-and-down">
+            <li><NavLink to="/">Home</NavLink></li>
+            <li> <NavLink to='/cart' >Cart</NavLink></li>
+          </ul>
+        </div>
+      </nav>
    
         
     )

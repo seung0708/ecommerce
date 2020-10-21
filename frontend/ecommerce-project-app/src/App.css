@@ -72,4 +72,5 @@
 .cart-list {
   position: relative;
   top: 100px;
+  margin-right: auto;
 }

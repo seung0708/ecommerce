@@ -32,6 +32,7 @@ class Api::V1::CartProductsController < ApplicationController
     end
 
     def destroy
+        #debugger
         @cart_product = CartProduct.find_by(id: params[:id])
         @cart_product.destroy
     end

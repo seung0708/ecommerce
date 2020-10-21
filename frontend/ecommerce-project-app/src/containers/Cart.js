@@ -1,29 +1,37 @@
 import React, {Component} from 'react';
 import {connect } from 'react-redux';
-import {productsInCart} from '../actions/cartActions'
+import {productsInCart, deleteProduct} from '../actions/cartActions'
 import CartList from '../components/CartList'
 
 class Cart extends Component {
+
     componentDidMount() {
         this.props.productsInCart() 
-       
+      
     } 
-
     render() {
-        let addProducts =  this.props.products.length > 0 ?  
-        this.props.products.map(product => {
+        const {products, deleteProduct} = this.props
+        let addProducts =  products.length > 0 ?  
+        products.map(product => {
             return (        
-               <CartList key={product.attributes.product.id} product={product} />
+                
+               <CartList 
+                    key={product.attributes.product.id} 
+                    product={product} 
+                    onCartListClick={() => deleteProduct(product.id)}
+                    
+                />
+               
             )
-        }) : <p>Cart is Empty</p>
+        }) : <h4>Cart is Empty</h4>
             
         return(
             <div>
-            {console.log(this.props.products)}
                {addProducts}
             </div>
         )
     }
+
 }
 
 const mapStateToProps = state => {
@@ -34,4 +42,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, {productsInCart})(Cart)
+export default connect(mapStateToProps, {productsInCart, deleteProduct})(Cart)

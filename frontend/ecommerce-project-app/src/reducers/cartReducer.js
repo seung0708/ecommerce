@@ -1,37 +1,45 @@
+
 const initialState = {
     addedProducts: [],
     products: []
 }
 
 export default (state = initialState, action) => {
-    switch(action.type) {
+   switch(action.type) {
         case "ADD_TO_CART": 
+        
+            return {
+                ...state, 
+                addedProducts: [...state.addedProducts]
+            
+            }
+        
+        case "ALL_PRODUCTS_IN_CART": 
+        
+            return {
+                ...state, 
+                addedProducts: action.addedProducts
+            
+            }
        
-        if (state.products) {
-           
+        case "REMOVE_FROM_CART": 
             return {
                 ...state, 
-                addedProducts: state.addedProducts
-            
+                addedProducts: [...state.addedProducts.filter(product => product.id  !== action.id )]
             }
-        }
-        case "ALL_PRODUCTS_IN_CART": {
-            return {
-                ...state, 
-                addedProducts: action.addedProducts,
-            
-            }
-        }
+     
         case "SET_ALL_PRODUCTS":
+            //debugger
             return {
                 ...state,
                 products: action.products
             }
+       
         default: 
             return state
 
     }  
 }
-
+ 
 
 

@@ -1,23 +1,38 @@
-export const allProductsInCart = addedProducts => {
+const allProductsInCart = addedProducts => {
     return{
         type: "ALL_PRODUCTS_IN_CART",
         addedProducts
     }
 }
 
-export const addToCart = id => {
-    console.log(id)
+const addToCart = id => {
+    
     return {
         type: "ADD_TO_CART",
         id
     } 
 
-} 
+}   
 
-export const setAllProducts = products => {
+const setAllProducts = products => {
     return {
         type: "SET_ALL_PRODUCTS",
         products
+    }
+}
+
+const removeFromCart = id => {
+    
+    return {
+        type: "REMOVE_FROM_CART",
+        id
+    }
+}
+
+const updateCart = id => {
+    return {
+        type: "UPDATE_CART",
+        id
     }
 }
 
@@ -87,3 +102,17 @@ export const addCart = id => {
             .catch(console.log)
         }
     }   
+
+    export const deleteProduct = id => {
+        //debugger
+        return dispatch => {
+         dispatch(removeFromCart(id))
+          return fetch(`http://localhost:3001/api/v1/cart_products/${id}`, {
+            credentials: "include",
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+        }
+    }
