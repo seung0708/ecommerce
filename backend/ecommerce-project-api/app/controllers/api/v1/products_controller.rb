@@ -10,21 +10,5 @@ class Api::V1::ProductsController < ApplicationController
         render json: ProductSerializer.new(@product)
     end
 
-    def create
-        @product = Product.new(product_params)
-
-        if @product.save 
-            render json: ProductSerializer.new(@product)
-        else 
-            render json: {
-                error: "There was a problem in adding your product"
-            }
-        end 
-    end
-
-    private 
-    def product_params
-        params.require(:product).permit(:title, :description, :image, :price)
-    end 
 
 end

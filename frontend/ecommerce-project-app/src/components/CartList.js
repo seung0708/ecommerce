@@ -28,6 +28,9 @@ const CartList = ({product, onCartListClick}) => {
                 </tr>
                 </tbody>
             </table>
+            <div className="sub-total">
+                <h6>Sub Total: {console.log(product.attributes.cart)}</h6>
+            </div>
         </div>
     )
 

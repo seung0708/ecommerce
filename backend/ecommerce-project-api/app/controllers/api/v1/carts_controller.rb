@@ -1,5 +1,4 @@
 class Api::V1::CartsController < ApplicationController
-    
     def show
         @cart = @current_cart
         render json: @cart

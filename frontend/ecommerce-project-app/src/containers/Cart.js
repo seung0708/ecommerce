@@ -14,7 +14,6 @@ class Cart extends Component {
         let addProducts =  products.length > 0 ?  
         products.map(product => {
             return (        
-                
                <CartList 
                     key={product.attributes.product.id} 
                     product={product} 

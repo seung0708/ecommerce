@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware, compose, combineReducers} from 'redux'
-
 import cartReducer from './reducers/cartReducer'
 import thunk from 'redux-thunk'
-
 
 const reducer = combineReducers({
     cartReducer

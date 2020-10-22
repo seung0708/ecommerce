@@ -29,12 +29,6 @@ const removeFromCart = id => {
     }
 }
 
-const updateCart = id => {
-    return {
-        type: "UPDATE_CART",
-        id
-    }
-}
 
 export const addCart = id => {
     return dispatch => {

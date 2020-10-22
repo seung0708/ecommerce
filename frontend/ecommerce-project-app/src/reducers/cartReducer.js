@@ -7,7 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
    switch(action.type) {
         case "ADD_TO_CART": 
-        
+        debugger
             return {
                 ...state, 
                 addedProducts: [...state.addedProducts]
@@ -15,11 +15,10 @@ export default (state = initialState, action) => {
             }
         
         case "ALL_PRODUCTS_IN_CART": 
-        
+            //debugger
             return {
                 ...state, 
                 addedProducts: action.addedProducts
-            
             }
        
         case "REMOVE_FROM_CART": 
