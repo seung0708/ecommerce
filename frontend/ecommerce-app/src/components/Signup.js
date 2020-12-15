@@ -5,11 +5,13 @@ import {signup, updateSignupForm} from '../actions/userActions'
 const Signup = ({signupFormData, updateSignupForm, signup}) => {
 
     const handleInputChange = event => {
-        const {name, value} = event.target 
+        
+        const {name, value} = event.target
         const updatedFormInfo = {
             ...signupFormData,
             [name]: value
         }
+        console.log(updatedFormInfo)
         updateSignupForm(updatedFormInfo)
     }
 
@@ -21,11 +23,11 @@ const Signup = ({signupFormData, updateSignupForm, signup}) => {
     return (
         <form onSubmit={handleSubmit}>
             <label>UserName:</label><br />
-            <input  id="email" value={signupFormData.username} name="username" type="text" onChange={handleInputChange} />
+            <input  id="email" value={signupFormData.username.value} name="username" type="text" onChange={handleInputChange} />
             <label>Email:</label><br />
-            <input value={signupFormData.email} name="email" type="text" onChange={handleInputChange}/>
+            <input value={signupFormData.email.value} name="email" type="text" onChange={handleInputChange}/>
             <label>Password:</label><br />
-            <input value={signupFormData.password} name="password" type="password" onChange={handleInputChange}/>
+            <input value={signupFormData.password.value} name="password" type="password" onChange={handleInputChange}/>
             <label>Password Confirmation:</label><br />
             <input value={signupFormData.password_confirmation} name="password" type="password" onChange={handleInputChange}/>
             <br />

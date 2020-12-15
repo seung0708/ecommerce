@@ -22,7 +22,7 @@ class App extends Component {
           <Navbar/>
           <Switch>
             <Route exact path='/cart' component={Cart} />
-            <Route exact path='/signup' component={Signup}/>
+            <Route exact path='/signup' component={Signup}/>var
             <Route exact path='/login' component={Login}/>
             <Route exact path='/not-found' component={PageNotFound} />
             <Route exact path='/' component={Home} /> 
