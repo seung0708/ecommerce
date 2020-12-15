@@ -3,21 +3,28 @@ import Home from './components/Home'
 import Navbar from './components/NavBar'
 import Cart from './containers/Cart'
 import PageNotFound from './components/PageNotFound'
-//import Footer from './components/Footer'
-//import Header from './components/Header'
 import './App.css';
 import {Route, Switch, Redirect} from 'react-router-dom'
+import Signup from './components/Signup'
+import Login from './components/Login'
+import {getCurrentUser} from './actions/userActions'
+import {connect} from 'react-redux'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getCurrentUser()
+  }  
 
   render() {
-   
+    //const {loggedIn} = this.props
     return(
          <div>
           <Navbar/>
           <Switch>
             <Route exact path='/cart' component={Cart} />
-            <Route path='/not-found' component={PageNotFound} />
+            <Route exact path='/signup' component={Signup}/>
+            <Route exact path='/login' component={Login}/>
+            <Route exact path='/not-found' component={PageNotFound} />
             <Route exact path='/' component={Home} /> 
             <Redirect to='/not-found' />
           </Switch>
@@ -28,11 +35,11 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-        
   return {
-      products: state.cartReducer.addedProducts
+    loggedIn: !!state.currentUser
   }
 }
 
 
-export default  App
+
+export default  connect(mapStateToProps, {getCurrentUser})(App)

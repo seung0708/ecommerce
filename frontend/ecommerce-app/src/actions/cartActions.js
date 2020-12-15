@@ -19,7 +19,7 @@ const setAllProducts = products => {
         type: "SET_ALL_PRODUCTS",
         products
     }
-}
+} 
 
 const removeFromCart = id => {
     
